@@ -5,6 +5,8 @@ Telekinesis-Annotation
 javascript Comment-based annotation library
 
 ```javascript
+var telekinesis = require('telekinesis-annotation');
+var parser = new telekinesis.AnnotationParser();
 var result = parser.parse(function(a /* @Annotate11 Foo11:Bar11 |@Annotate12 Foo12:Bar12 */ 
 	,b /* @Annotate21 Foo21:Bar21 | @Annotate22 Foo22:Bar22 */ )
 	 /*@Annotate31 Foo31:Bar31 | @Annotate32 Foo32:Bar32 */ {

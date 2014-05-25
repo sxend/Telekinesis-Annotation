@@ -1,6 +1,6 @@
 {
   "name": "telekinesis-annotation",
-  "version": "0.0.2",
+  "version": "0.0.2-002",
   "description": "comment-based annotation library",
   "main": "index.js",
   "scripts": {
