@@ -3,68 +3,84 @@ var telekinesis = require('../');
 var parser = new telekinesis.AnnotationParser();
 
 var result = parser.parse(function(){});
-expect(result.arg).to.be(null);
-expect(result.type).to.be(null);
+expect(result.arg.length).to.be(0);
+expect(result.arg.isEmpty()).to.be(true);
+expect(result.type.length).to.be(0);
+expect(result.type.isEmpty()).to.be(true);
 
 var result = parser.parse(function (/**/){});
-expect(result.arg).to.be(null);
-expect(result.type).to.be(null);
+expect(result.arg.length).to.be(0);
+expect(result.arg.isEmpty()).to.be(true);
+expect(result.type.length).to.be(0);
+expect(result.type.isEmpty()).to.be(true);
 
 var result = parser.parse(function()/**/{});
-expect(result.arg).to.be(null);
-expect(result.type).to.be(null);
+expect(result.arg.length).to.be(0);
+expect(result.arg.isEmpty()).to.be(true);
+expect(result.type.length).to.be(0);
+expect(result.type.isEmpty()).to.be(true);
 
 var result = parser.parse(function(/**/)/**/{});
-expect(result.arg).to.be(null);
-expect(result.type).to.be(null);
+expect(result.arg.length).to.be(0);
+expect(result.arg.isEmpty()).to.be(true);
+expect(result.type.length).to.be(0);
+expect(result.type.isEmpty()).to.be(true);
 
 var result = parser.parse(function(a/**/){});
 expect(result.arg[0].name).to.be('a');
-expect(result.arg[0].annotations).to.be(null);
-expect(result.type).to.be(null);
+expect(result.arg[0].annotations.length).to.be(0);
+expect(result.type.length).to.be(0);
+expect(result.type.isEmpty()).to.be(true);
 
 var result = parser.parse(function(a/**/,b,c/*@Annotate*/){});
 expect(result.arg[0].name).to.be('a');
-expect(result.arg[0].annotations).to.be(null);
+expect(result.arg[0].annotations.length).to.be(0);
 expect(result.arg[1].name).to.be('b');
-expect(result.arg[1].annotations).to.be(null);
+expect(result.arg[1].annotations.length).to.be(0);
 expect(result.arg[2].name).to.be('c');
 expect(result.arg[2].annotations[0].name).to.be('@Annotate');
-expect(result.arg[2].annotations[0].values).to.be(null);
-expect(result.type).to.be(null);
+expect(result.arg[2].annotations[0].values.length).to.be(0);
+expect(result.type.length).to.be(0);
+expect(result.type.isEmpty()).to.be(true);
 
 var result = parser.parse(function(a/**/,b
 	,c/* @Annotate*/){});
 expect(result.arg[0].name).to.be('a');
-expect(result.arg[0].annotations).to.be(null);
+expect(result.arg[0].annotations.length).to.be(0);
 expect(result.arg[1].name).to.be('b');
-expect(result.arg[1].annotations).to.be(null);
+expect(result.arg[1].annotations.length).to.be(0);
 expect(result.arg[2].name).to.be('c');
 expect(result.arg[2].annotations[0].name).to.be('@Annotate');
-expect(result.arg[2].annotations[0].values).to.be(null);
-expect(result.type).to.be(null);
+expect(result.arg[2].annotations[0].values.length).to.be(0);
+expect(result.type.length).to.be(0);
+expect(result.type.isEmpty()).to.be(true);
 
 var result = parser.parse(function(a/*@Annotate*/){});
 expect(result.arg[0].name).to.be('a');
 expect(result.arg[0].annotations[0].name).to.be('@Annotate');
-expect(result.arg[0].annotations[0].values).to.be(null);
-expect(result.type).to.be(null);
+expect(result.arg[0].annotations[0].values.length).to.be(0);
+expect(result.type.length).to.be(0);
+expect(result.type.isEmpty()).to.be(true);
 
 var result = parser.parse(function(a)
 	/*@Annotate*/{});
 expect(result.arg[0].name).to.be('a');
-expect(result.arg[0].annotations).to.be(null);
+expect(result.arg[0].annotations.length).to.be(0);
 expect(result.type[0].name).to.be('@Annotate');
-expect(result.type[0].values).to.be(null);
+expect(result.type[0].values.length).to.be(0);
 
 var result = parser.parse(function(){});
-expect(result.arg).to.be(null);
-expect(result.type).to.be(null);
+expect(result.arg.length).to.be(0);
+expect(result.arg.isEmpty()).to.be(true);
+expect(result.type.length).to.be(0);
+expect(result.type.isEmpty()).to.be(true);
 
 var result = parser.parse(function
 (/*@   */){/**/});
-expect(result.arg).to.be(null);
-expect(result.type).to.be(null);
+expect(result.arg.length).to.be(0);
+expect(result.arg.isEmpty()).to.be(true);
+expect(result.type.length).to.be(0);
+expect(result.type.isEmpty()).to.be(true);
 
 var result = parser.parse(function( 
  	a /* @Annotate11 Foo11:Bar11 | @Annotate12 Foo12:Bar12 */ 
@@ -123,7 +139,7 @@ expect(result.arg[0].annotations[1].values[0]).to.be('Foo12');
 expect(result.arg[0].annotations[1].values[1]).to.be('Bar12');
 
 expect(result.arg[1].name).to.be('b');
-expect(result.arg[1].annotations).to.be(null);
+expect(result.arg[1].annotations.length).to.be(0);
 
 expect(result.type[0].name).to.be('@Annotate31');
 expect(result.type[0].values[0]).to.be('Foo31');
@@ -152,7 +168,7 @@ expect(result.arg[0].annotations[1].values[0]).to.be('Foo12');
 expect(result.arg[0].annotations[1].values[1]).to.be(undefined);
 
 expect(result.arg[1].name).to.be('b');
-expect(result.arg[1].annotations).to.be(null);
+expect(result.arg[1].annotations.length).to.be(0);
 
 expect(result.type[0].name).to.be('@Annotate31');
 expect(result.type[0].values[0]).to.be('Foo31');
@@ -173,18 +189,18 @@ var result = parser.parse(function(
 });
 expect(result.arg[0].name).to.be('$a');
 expect(result.arg[0].annotations[0].name).to.be('@Annotate11');
-expect(result.arg[0].annotations[0].values).to.be(null);
+expect(result.arg[0].annotations[0].values.length).to.be(0);
 
 expect(result.arg[0].annotations[1].name).to.be('@Annotate12');
-expect(result.arg[0].annotations[1].values).to.be(null);
+expect(result.arg[0].annotations[1].values.length).to.be(0);
 
 expect(result.arg[1].name).to.be('b');
-expect(result.arg[1].annotations).to.be(null);
+expect(result.arg[1].annotations.length).to.be(0);
 
 expect(result.type[0].name).to.be('@Annotate31');
-expect(result.type[0].values).to.be(null);
+expect(result.type[0].values.length).to.be(0);
 
 expect(result.type[1].name).to.be('@Annotate32');
-expect(result.type[1].values).to.be(null);
+expect(result.type[1].values.length).to.be(0);
 
-console.log('done.');
+console.log('succeed.');
